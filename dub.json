@@ -1,0 +1,77 @@
+{
+	"name": "convcov",
+	"description": "A coverage converter tool",
+	"license": "MIT",
+	"copyright": "Copyright © 2021, Luís Ferreira",
+	"authors": [
+		"Luís Ferreira"
+	],
+	"targetName": "convcov",
+	"targetPath": "bin",
+	"targetType": "library",
+	"dependencies": {
+		"diet-ng": "~>1.8.0",
+		"asdf": "~>0.7.12"
+	},
+	"dflags": [ "-preview=dip1000", "-preview=dtorfields", "-preview=fieldwise" ],
+	"dflags-ldc": [ "-mattr=+sse4.2" ],
+	"buildRequirements": [ "disallowDeprecations" ],
+	"buildOptions": [ "warningsAsErrors", "deprecationErrors" ],
+	"configurations": [
+		{
+			"name": "default"
+		},
+		{
+			"name": "application",
+			"targetType": "executable",
+			"versions": ["Convcov_app", "Convcov_logger"]
+		},
+		{
+			"name": "static",
+			"targetType": "staticLibrary"
+		},
+		{
+			"name": "shared",
+			"targetType": "dynamicLibrary"
+		},
+		{
+			"name": "unittest",
+			"buildOptions": ["unittests"],
+			"dflags": [ "-unittest" ]
+		},
+		{
+			"name": "unittest-cov",
+			"buildOptions": ["unittests", "coverage"]
+		},
+		{
+			"name": "unittest-threaded",
+			"dependencies": {
+				"aurorafw:unit": "~>0.0.1-alpha.4"
+			},
+			"buildOptions": ["unittests", "lowmem"],
+			"buildRequirements": ["silenceDeprecations"]
+		},
+		{
+			"name": "unittest-cov-threaded",
+			"dependencies": {
+				"aurorafw:unit": "~>0.0.1-alpha.4"
+			},
+			"buildOptions": ["unittests", "coverage", "lowmem"],
+			"buildRequirements": ["silenceDeprecations"]
+		}
+	],
+	"buildTypes": {
+		"debug": {
+			"buildOptions": [ "debugMode", "debugInfo" ]
+		},
+		"release": {
+			"buildOptions": [ "releaseMode", "optimize", "noBoundsCheck" ]
+		},
+		"release-debug": {
+			"buildOptions": [ "releaseMode", "optimize", "noBoundsCheck", "debugInfo" ]
+		},
+		"release-inline": {
+			"buildOptions": [ "releaseMode", "optimize", "inline", "noBoundsCheck" ]
+		}
+	}
+}
