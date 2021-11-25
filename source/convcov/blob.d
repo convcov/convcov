@@ -70,7 +70,7 @@ struct Blob
 			(ubyte[] b) => MemoryBlob(null, b),
 			(MemoryBlob mb) => mb,
 			(string path) => MemoryBlob(path, maybeFile(path) ? read(path) : null),
-			(File file) => MemoryBlob(file.name, maybeFile(file) ? read(file) : null)
+			(File file) => MemoryBlob(file.name.idup, maybeFile(file) ? read(file) : null)
 		);
 	}
 
@@ -80,7 +80,7 @@ struct Blob
 			(ubyte[] b) => null,
 			(MemoryBlob mb) => mb.path,
 			(string path) => path,
-			(File file) => file.name
+			(File file) => file.name.idup
 		);
 	}
 
