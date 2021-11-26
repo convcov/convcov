@@ -7,6 +7,7 @@ import convcov.coverage;
 import convcov.converters.iconverter;
 import convcov.formatters.iformatter;
 import convcov.logging;
+import convcov.utils.cinterfacing;
 
 import std.stdio : stdin, stdout;
 
@@ -55,4 +56,16 @@ struct ConvertOptions
 	}
 }
 
+extern(C):
 
+int convcov_convert(ConvertOptions options) nothrow
+{
+	try options.convert();
+	catch (Exception ex)
+	{
+		convcov_error = allocConvcovError(ex.msg);
+		return -1;
+	}
+
+	return 0;
+}
