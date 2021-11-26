@@ -13,7 +13,8 @@
 		"diet-ng": "~>1.8.0",
 		"asdf": "~>0.7.12"
 	},
-	"dflags": [ "-preview=dip1000", "-preview=dtorfields", "-preview=fieldwise" ],
+	"dflags": [ "-preview=dip25","-preview=dip1000", "-preview=dtorfields",
+		"-preview=fieldwise", "-preview=intpromote" ],
 	"dflags-ldc": [ "-mattr=+sse4.2" ],
 	"buildRequirements": [ "disallowDeprecations" ],
 	"buildOptions": [ "warningsAsErrors", "deprecationErrors" ],
